@@ -1,0 +1,26 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "Test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lando1234/Forkify.git"
+  },
+  "author": "Matias Landau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lando1234/Forkify/issues"
+  },
+  "homepage": "https://github.com/lando1234/Forkify#readme",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "webpack": "^4.16.5"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}
