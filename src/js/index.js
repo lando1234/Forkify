@@ -1,4 +1,5 @@
 import Search from "./model/search";
+import Recipe from "./model/Recipe";
 import * as searchView from './view/searchView';
 import { elements, renderLoader, clearLoader } from "./view/base";
 
