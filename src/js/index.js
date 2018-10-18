@@ -37,8 +37,8 @@ elements.searchResPages.addEventListener('click', event => {
     const element = event.target.closest('.btn-inline');
     if (element) {
         const goto = parseInt(element.dataset.goto, 10);
-        clearResults();
-        renderResults(state.search.result, goto);
+        searchView.clearResults();
+        searchView.renderResults(state.search.result, goto);
 
     }
 });
