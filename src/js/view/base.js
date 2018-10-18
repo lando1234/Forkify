@@ -3,14 +3,15 @@ export const elements = {
     searchInput: document.querySelector(".search__field"),
     searchResList: document.querySelector(".results__list"),
     searchRes: document.querySelector(".results"),
+    searchResPages: document.querySelector(".results__pages"),
+
 };
 
 export const elementStrings = {
     loader: "loader"
 }
 
-export const renderLoader = parent =>{
-    console.log("hola");
+export const renderLoader = parent => {
     const loader = `
         <div class="${elementStrings.loader}">
             <svg>
@@ -22,7 +23,7 @@ export const renderLoader = parent =>{
 }
 
 export const clearLoader = () => {
-    const loader  = document.querySelector(`.${elementStrings.loader}`);
-    if( loader ) loader.parentElement.removeChild(loader);
+    const loader = document.querySelector(`.${elementStrings.loader}`);
+    if (loader) loader.parentElement.removeChild(loader);
 
 }
