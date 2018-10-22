@@ -15,7 +15,7 @@ export default class Recipe {
             this.url = res.data.recipe.source_url;
             this.ingredients = res.data.recipe.ingredients;
         } catch (error) {
-            alert("Something went Wrong");
+            console.log("Something went Wrong");
         }
 
     }
@@ -30,6 +30,30 @@ export default class Recipe {
     calcServings() {
         this.servings = 4;
     }
+
+
+
+    parseIngredients() {
+        const unitsLong = ['tablespoons', 'tablespoon', 'ounce', 'ounces', 'teaspoon', 'teaspoons', 'cups', 'pounds'];
+        const unitsShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
+
+        const newIngredients = this.ingredients.map(el => {
+            let ingredient = el.toLowerCase();
+
+            unitsLong.forEach((unit, i) => {
+                ingredient = el.replace(unit, unitsShort[i]);
+                console.log(unit, ingredient);
+            });
+
+            ingredient = ingredient.replace(/\(.*\)/, '');
+
+            return ingredient;
+        });
+
+        this.ingredients = newIngredients
+    }
+
+
 }
 
 
