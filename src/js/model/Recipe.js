@@ -34,20 +34,51 @@ export default class Recipe {
 
 
     parseIngredients() {
-        const unitsLong = ['tablespoons', 'tablespoon', 'ounce', 'ounces', 'teaspoon', 'teaspoons', 'cups', 'pounds'];
+        const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
         const unitsShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
 
         const newIngredients = this.ingredients.map(el => {
             let ingredient = el.toLowerCase();
 
             unitsLong.forEach((unit, i) => {
-                ingredient = el.replace(unit, unitsShort[i]);
-                console.log(unit, ingredient);
+                ingredient = ingredient.replace(unit, unitsShort[i]).replace('  ', ' ');
             });
 
-            ingredient = ingredient.replace(/\(.*\)/, '');
+            ingredient = ingredient.replace(/\(.*\)/, ' ');
 
-            return ingredient;
+            const ingArr = ingredient.split(' ').filter(el => el !== '');
+            const unitIndex = ingArr.findIndex(el2 => unitsShort.includes(el2));
+
+            let objIng = {
+                count: 1,
+                unit: '',
+                ingredient
+            };
+
+            if (unitIndex > -1) {
+                const arrCount = ingArr.slice(0, unitIndex);
+                let count;
+                if (arrCount.length === 1) {
+                    count = eval(ingArr[0].replace('-', '+'));
+                } else {
+                    count = eval(arrCount.join('+'))
+                }
+
+                objIng = {
+                    count: count,
+                    unit: ingArr[unitIndex],
+                    ingredient: ingArr.slice(unitIndex + 1).join(' ')
+                }
+
+            } else if (parseInt(ingArr, 10)) {
+                objIng = {
+                    count: parseInt(ingArr, 10),
+                    unit: '',
+                    ingredient: ingArr.slice(1).join(' ')
+                }
+            }
+
+            return objIng;
         });
 
         this.ingredients = newIngredients
@@ -56,8 +87,5 @@ export default class Recipe {
 
 }
 
-
-
 //a6af68bf18f807a782df1d1967d2b92a
-
 //https://www.food2fork.com/api/search

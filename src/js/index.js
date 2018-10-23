@@ -70,7 +70,8 @@ const controlRecipe = async() => {
 
             console.log(state.recipe);
         } catch (err) {
-            alert("Error Processing Recipe");
+            console.log(err)
+                //alert("Error Processing Recipe");
         }
     }
 }
