@@ -24,7 +24,7 @@ export default class Recipe {
         const numIngredients = this.ingredients.length;
         const periods = Math.ceil(numIngredients / 3);
 
-        return 15 * periods;
+        this.time = 15 * periods;
     }
 
     calcServings() {
@@ -36,6 +36,7 @@ export default class Recipe {
     parseIngredients() {
         const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
         const unitsShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
+        const units = [...unitsShort, 'g', 'kg'];
 
         const newIngredients = this.ingredients.map(el => {
             let ingredient = el.toLowerCase();
@@ -47,7 +48,7 @@ export default class Recipe {
             ingredient = ingredient.replace(/\(.*\)/, ' ');
 
             const ingArr = ingredient.split(' ').filter(el => el !== '');
-            const unitIndex = ingArr.findIndex(el2 => unitsShort.includes(el2));
+            const unitIndex = ingArr.findIndex(el2 => units.includes(el2));
 
             let objIng = {
                 count: 1,

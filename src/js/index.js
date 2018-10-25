@@ -1,6 +1,7 @@
 import Search from "./model/search";
 import Recipe from "./model/Recipe";
 import * as searchView from './view/searchView';
+import * as recipeView from './view/recipeView';
 import { elements, renderLoader, clearLoader } from "./view/base";
 
 /** Global Stage of the app
@@ -56,12 +57,19 @@ elements.searchResPages.addEventListener('click', event => {
 const controlRecipe = async() => {
     const id = window.location.hash.replace('#', '');
 
+
+
     if (id) {
+        recipeView.clearRecipe();
+        renderLoader(elements.recipe);
+
+        if (state.search) {
+            searchView.highlightSelected(id);
+        }
 
         state.recipe = new Recipe(id);
 
         try {
-
             await state.recipe.getRecipe();
 
             state.recipe.calcTime();
@@ -69,6 +77,9 @@ const controlRecipe = async() => {
             state.recipe.parseIngredients();
 
             console.log(state.recipe);
+
+            clearLoader();
+            recipeView.renderRecipe(state.recipe);
         } catch (err) {
             console.log(err)
                 //alert("Error Processing Recipe");
